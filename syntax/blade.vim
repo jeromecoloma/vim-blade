@@ -50,9 +50,16 @@ syn cluster bladeExempt contains=bladeComment,bladePhpRegion,bladePhpParenBlock,
 
 syn cluster htmlPreproc add=bladeEcho,bladeComment,bladePhpRegion
 
+" http://stackoverflow.com/questions/10150659/vim-dont-underline-leading-whitespace-in-html-links#answers
+syn region htmlLink start="<a\>\_[^>]*\<href\>" end="</a>"me=e-4 keepend contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc
+syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "^\s*\zs.\{-}\ze\s*$"
+syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "\S.\{-}\ze\s*$"
+
 syn case ignore
 syn keyword bladeTodo todo fixme xxx note  contained
 
+hi def link htmlLink           NONE
+hi def link htmlLinkText       Underlined
 hi def link bladeDelimiter      PreProc
 hi def link bladeComment        Comment
 hi def link bladeTodo           Todo
